@@ -14,11 +14,13 @@ request when you want to choose another institution or reporting window.
 
 ## Install v0.1.1
 
-Python 3.10 or newer. Install the versioned release wheel without requiring Git:
+Python 3.10 or newer. Install from [PyPI](https://pypi.org/project/us-bank-data/):
 
 ```bash
-python -m pip install https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.1.1/us_bank_data-0.1.1-py3-none-any.whl
+python -m pip install us-bank-data
 ```
+
+Pin `us-bank-data==0.1.1` when reproducing this release. The [GitHub release](https://github.com/anshuman-pandey/us-bank-data/releases/tag/v0.1.1) also provides an installable wheel and checksums.
 
 Or install the tagged source with Git:
 
@@ -26,7 +28,7 @@ Or install the tagged source with Git:
 python -m pip install "us-bank-data @ git+https://github.com/anshuman-pandey/us-bank-data.git@v0.1.1#subdirectory=packages/us-bank-data"
 ```
 
-The renamed package is installable from this GitHub release. Its PyPI publication is a separate step.
+The PyPI install was verified in a fresh environment. Existing earlier imports continue to work.
 Optional extras include `pandas`, `polars`, `parquet`, and `notebooks`.
 For example, install `pandas` in the same environment to use `.to_pandas()`.
 

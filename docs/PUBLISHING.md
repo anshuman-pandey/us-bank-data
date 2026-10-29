@@ -1,48 +1,46 @@
 # Publishing US Bank Data
 
-The GitHub release is independently installable. A PyPI release is a separate
-publication and must not be advertised as available before its project page and
-clean index installation actually work.
+## Current public releases
 
-## PyPI account setup
+- `us-bank-data` v0.1.1 is the primary public package on PyPI. Import `usbankdata`.
+- `banksonsale-data` v0.1.0 is the existing independently usable engine; its imports and source snapshots remain compatible.
+- The OpenBB extension is available from the GitHub source/release. Its PyPI project has not been published.
 
-The repository has a manual `publish-pypi.yml` workflow using PyPI's trusted
-publishing protocol; no API token belongs in source, issues, chat or workflows.
-Before running it, the account owner must register the publisher on PyPI for both
-`us-bank-data`, `banksonsale-data`, and `openbb-banksonsale`:
+The GitHub repository was renamed to `anshuman-pandey/us-bank-data` without changing
+its repository ID. Existing repository and release URLs redirect to the new name.
+The public package adds a small entry point; financial implementation and archived
+sources remain in `src/banksonsale_data` without a second implementation.
+
+## PyPI release workflow
+
+The manually dispatched `publish-pypi.yml` workflow uses trusted publishing. The
+verified publisher for `us-bank-data` is:
 
 - Repository owner: `anshuman-pandey`
 - Repository name: `us-bank-data`
 - Workflow filename: `publish-pypi.yml`
 - Environment name: `pypi`
 
-For an unpublished package, use PyPI's pending-publisher flow. Account creation,
-2FA and new publishing trust require the account owner's action/authorization.
-Reference: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
+Dispatch from the current default branch with a tested `release_tag` and
+`package=us-bank-data` (the default). It builds `packages/us-bank-data`, checks
+exports/import identity against the engine, and publishes with short-lived OIDC
+credentials. No API token belongs in source, chat or workflows. Verify a fresh
+public-index install before advertising a new version.
 
-PyPI permits only one pending project per matching publisher configuration.
-For the initial release, register `banksonsale-data`, dispatch this workflow
-with `package=core`, and verify that publication converts it to an active
-publisher. Then register `openbb-banksonsale` with the same configuration and
-dispatch with `package=openbb`. Once both projects exist and trust the workflow,
-`package=all` can publish both together. The workflow checks out `release_tag`
-for package sources; the workflow itself should be dispatched from the current
-default branch so the sequential publishing inputs are available.
+The older engine's active publisher and OpenBB's pending publisher still refer
+to the former repository name. They were not retargeted by the latest approval,
+which authorized only `us-bank-data`. Matching trust must be reviewed before
+future `core`, `openbb` or `all` runs; do not assume those targets are ready.
 
-After registration, run the manual GitHub workflow against the tested tag. It
-rebuilds and checks the core plus OpenBB distributions and publishes with short-
-lived OIDC credentials. Verify both PyPI project pages and clean installations
-before changing README/website instructions to registry shorthand.
+PyPI permits only one pending project per identical publisher configuration.
+Publish new projects sequentially so each pending publisher becomes active.
+Account creation, 2FA and new publishing trust require the account owner's
+action/authorization. Reference:
+https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
 ## Release integrity
 
-Build and run offline tests, notebook execution, installed-wheel checks and the
-optional OpenBB integration before tagging. Pin source data and retain its
-manifest; no silent replacement of sample bytes under an existing release tag.
-Upload checksummed artifacts to the GitHub release. Never bundle private website
-source, user records, prospect lists, API keys or account exports.
-
-The descriptive public entry package is built from `packages/us-bank-data` and
-published with `package=us-bank-data`. It depends on the existing engine; this
-name change does not move or duplicate the financial implementation. New pending
-publishers for an identical workflow configuration must be published sequentially.
+Build and run data tests, notebook execution, installed-wheel checks and relevant
+integration checks before tagging. Keep pinned sample bytes and existing release
+tags immutable. Upload checksummed release artifacts. Never bundle private
+website source, user records, prospect lists, API keys or account exports.

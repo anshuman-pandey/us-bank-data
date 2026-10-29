@@ -10,8 +10,8 @@ on:
         description: Package to publish (new projects require sequential pending publishers)
         required: true
         type: choice
-        options: [all, core, openbb, us-bank-data]
-        default: all
+        options: [us-bank-data, core, openbb, all]
+        default: us-bank-data
 permissions:
   contents: read
 jobs:
