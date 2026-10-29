@@ -2,13 +2,12 @@
 
 **Free U.S. bank data for Python: FDIC financials with the quarter, units and original source attached.**
 
-[BanksOnSale.com](https://www.banksonsale.com) · [Public data catalog](https://www.banksonsale.com/data) · [Metric definitions](https://github.com/anshuman-pandey/us-bank-data/blob/v0.1.1/docs/METRICS.md) · [OpenBB extension](https://github.com/anshuman-pandey/us-bank-data/tree/v0.1.1/integrations/openbb)
+[Documentation](https://www.banksonsale.com/developers) · [Public data catalog](https://www.banksonsale.com/data) · [Metric definitions](https://github.com/anshuman-pandey/us-bank-data/blob/v0.1.1/docs/METRICS.md) · [OpenBB extension](https://github.com/anshuman-pandey/us-bank-data/tree/v0.1.1/integrations/openbb)
 
 Get a bank's quarterly financial panel, inspect the source evidence, and export
-CSV, JSON or Parquet. The public `us-bank-data` package installs the existing standard-library
-`banksonsale-data` engine: **no account, API key, paid subscription or background
-telemetry**. `import usbankdata` and existing `import banksonsale_data` code use
-the same implementation; the financial data contract and source evidence are unchanged.
+CSV, JSON or Parquet. **No account, API key, paid subscription or background
+telemetry.** The data engine uses Python’s standard library; analysis libraries
+such as pandas and Polars are optional.
 
 Start offline with real, pinned samples. Use the same interface for a live FDIC
 request when you want to choose another institution or reporting window.
@@ -112,23 +111,18 @@ us-bank-data financials --cert 58665 --quarters 8 --through 2026Q2 --output live
 us-bank-data definitions
 ```
 
-## Continue the research in BanksOnSale
-
-[Open Live Oak's public financial summary](https://www.banksonsale.com/banks/58665)
-or [explore the BanksOnSale research workspace](https://www.banksonsale.com/discover).
-The hosted product adds saved screens, watchlists, research dossiers, monitoring,
-models and exports; some features require a subscription. Its data edition is
-displayed separately and can differ from this package's selected period.
-
-These are optional links. The package keeps working without an account, sends
-no usage telemetry, and does not create a subscription. See [continuing your
-research](https://github.com/anshuman-pandey/us-bank-data/blob/v0.1.1/docs/CONTINUE_IN_BANKSONSALE.md).
-
 ## OpenBB
 
 The optional [independently maintained OpenBB V5 extension](https://github.com/anshuman-pandey/us-bank-data/tree/v0.1.1/integrations/openbb)
 adds `obb.banksonsale`. It reuses this package and its definitions. It is not
 bundled with or endorsed by OpenBB. The core package does not require OpenBB.
+
+## Compatibility
+
+The `us-bank-data` entry package installs the existing `banksonsale-data` engine.
+`import usbankdata` and earlier `import banksonsale_data` code use the same
+implementation. Existing releases, field definitions, source evidence and dataset
+identifiers remain compatible.
 
 ## Source, license and citation
 
