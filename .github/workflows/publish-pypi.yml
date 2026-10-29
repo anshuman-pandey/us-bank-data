@@ -6,6 +6,12 @@ on:
         description: Existing tested release tag to publish
         required: true
         default: v0.1.0
+      package:
+        description: Package to publish (new projects require sequential pending publishers)
+        required: true
+        type: choice
+        options: [all, core, openbb]
+        default: all
 permissions:
   contents: read
 jobs:
@@ -25,8 +31,10 @@ jobs:
       - run: python -m pip install build twine
       - run: python -m pip install .
       - run: python -m unittest discover -s tests -v
-      - run: python -m build
-      - run: python -m build integrations/openbb --outdir dist
+      - if: inputs.package != 'openbb'
+        run: python -m build
+      - if: inputs.package != 'core'
+        run: python -m build integrations/openbb --outdir dist
       - run: python -m twine check dist/*
       - uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086
         with:

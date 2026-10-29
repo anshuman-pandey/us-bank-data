@@ -20,6 +20,15 @@ For an unpublished package, use PyPI's pending-publisher flow. Account creation,
 2FA and new publishing trust require the account owner's action/authorization.
 Reference: https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/
 
+PyPI permits only one pending project per matching publisher configuration.
+For the initial release, register `banksonsale-data`, dispatch this workflow
+with `package=core`, and verify that publication converts it to an active
+publisher. Then register `openbb-banksonsale` with the same configuration and
+dispatch with `package=openbb`. Once both projects exist and trust the workflow,
+`package=all` can publish both together. The workflow checks out `release_tag`
+for package sources; the workflow itself should be dispatched from the current
+default branch so the sequential publishing inputs are available.
+
 After registration, run the manual GitHub workflow against the tested tag. It
 rebuilds and checks the core plus OpenBB distributions and publishes with short-
 lived OIDC credentials. Verify both PyPI project pages and clean installations
