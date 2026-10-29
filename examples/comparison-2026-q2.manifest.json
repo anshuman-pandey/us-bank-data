@@ -1,0 +1,707 @@
+{
+  "publisher": "BanksOnSale",
+  "purpose": "Same-quarter interface example across different bank sizes; not a matched peer group, ranking or recommendation.",
+  "report_date": "2026-06-30",
+  "artifact_sha256": "4e21cd4c6be26319da7b67915bef5c241069593d313df31f715c496db6a8d55c",
+  "panels": [
+    {
+      "publisher": "BanksOnSale",
+      "publisher_url": "https://banksonsale.com",
+      "package_version": "0.1.0",
+      "schema_version": "1.0",
+      "bank": {
+        "cert": 628,
+        "name": "JPMorgan Chase Bank, National Association",
+        "city": "Columbus",
+        "state": "OH",
+        "rssd_id": null,
+        "active": true,
+        "source_updated_at": "03/06/2025"
+      },
+      "requested_dates": [
+        "2024-09-30",
+        "2024-12-31",
+        "2025-03-31",
+        "2025-06-30",
+        "2025-09-30",
+        "2025-12-31",
+        "2026-03-31",
+        "2026-06-30"
+      ],
+      "report_date_defaulted": false,
+      "metric_definitions": {
+        "assets_usd": {
+          "name": "assets_usd",
+          "source_field": "ASSET",
+          "label": "Total assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported assets; excludes off-balance-sheet accounts.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "deposits_usd": {
+          "name": "deposits_usd",
+          "source_field": "DEP",
+          "label": "Total deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported deposits; not the domestic-deposit denominator.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_deposits_usd": {
+          "name": "domestic_deposits_usd",
+          "source_field": "DEPDOM",
+          "label": "Domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Domestic deposits, retained separately from total deposits.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "equity_usd": {
+          "name": "equity_usd",
+          "source_field": "EQ",
+          "label": "Total equity capital",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Accounting equity; not a regulatory capital ratio.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "intangibles_usd": {
+          "name": "intangibles_usd",
+          "source_field": "INTAN",
+          "label": "Intangible assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported intangible assets; missing observations remain missing.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "net_loans_usd": {
+          "name": "net_loans_usd",
+          "source_field": "LNLSNET",
+          "label": "Net loans and leases",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Net loans and leases, not gross loans or originations.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "uninsured_deposits_usd": {
+          "name": "uninsured_deposits_usd",
+          "source_field": "DEPUNINS",
+          "label": "Estimated uninsured domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported estimate for domestic offices and insured branches in U.S. territories and possessions; divide by domestic deposits only when both observations exist and the denominator is positive.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "core_deposits_usd": {
+          "name": "core_deposits_usd",
+          "source_field": "COREDEP",
+          "label": "Core deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "FDIC source-defined COREDEP measure; not an inference about loyalty or funding stability.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "cet1_ratio_pct": {
+          "name": "cet1_ratio_pct",
+          "source_field": "RBCT1CER",
+          "label": "Common equity tier 1 ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Risk-based CET1 ratio. A value of 12.5 means 12.5 percent; not RBC1AAJ.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "leverage_ratio_pct": {
+          "name": "leverage_ratio_pct",
+          "source_field": "RBC1AAJ",
+          "label": "Regulatory leverage ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC leverage ratio-PCA, tier 1 capital divided by adjusted average assets; not CET1.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roa_pct": {
+          "name": "roa_pct",
+          "source_field": "ROA",
+          "label": "Return on assets",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; never annualize this ratio again. Negative reported values are preserved.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roe_pct": {
+          "name": "roe_pct",
+          "source_field": "ROE",
+          "label": "Return on equity",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; missing or inapplicable observations remain missing.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_offices": {
+          "name": "domestic_offices",
+          "source_field": "OFFDOM",
+          "label": "Domestic offices",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Reported domestic offices, including headquarters.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "employees": {
+          "name": "employees",
+          "source_field": "NUMEMP",
+          "label": "Reported employees",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC NUMEMP observation, without inferring an employment category beyond the source definition.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        }
+      },
+      "sources": [
+        {
+          "agency": "FDIC",
+          "dataset": "institutions",
+          "url": "https://api.fdic.gov/banks/institutions?filters=CERT%3A628&fields=CERT%2CNAME%2CCITY%2CSTALP%2CRSSDID%2CACTIVE%2CDATEUPDT&limit=2&format=json",
+          "retrieved_at": "2026-10-29T13:20:28.063617+00:00",
+          "source_index_created_at": "2026-10-23T11:54:56Z",
+          "source_index_name": "institutions_20261023090007",
+          "sha256": "bcaf464756e2abff6168061b133ab5a8fde09a7e117a34fe8b72d989eb383627",
+          "raw_json": "{\"meta\":{\"total\":1,\"parameters\":{\"filters\":\"CERT:628\",\"fields\":\"CERT,NAME,CITY,STALP,RSSDID,ACTIVE,DATEUPDT\",\"limit\":\"2\"},\"index\":{\"name\":\"institutions_20261023090007\",\"createTimestamp\":\"2026-10-23T11:54:56Z\"}},\"data\":[{\"data\":{\"CITY\":\"Columbus\",\"ACTIVE\":1,\"DATEUPDT\":\"03/06/2025\",\"CERT\":628,\"STALP\":\"OH\",\"NAME\":\"JPMorgan Chase Bank, National Association\",\"ID\":\"628\"},\"score\":0}],\"totals\":{\"count\":1}}"
+        },
+        {
+          "agency": "FDIC",
+          "dataset": "financials",
+          "url": "https://api.fdic.gov/banks/financials?filters=CERT%3A628+AND+REPDTE%3A%5B20240930+TO+20260630%5D&fields=CERT%2CREPDTE%2CASSET%2CDEP%2CDEPDOM%2CEQ%2CINTAN%2CLNLSNET%2CDEPUNINS%2CCOREDEP%2CRBCT1CER%2CRBC1AAJ%2CROA%2CROE%2COFFDOM%2CNUMEMP&limit=100&sort_by=REPDTE&sort_order=ASC&format=json",
+          "retrieved_at": "2026-10-29T13:20:29.147769+00:00",
+          "source_index_created_at": "2026-08-19T18:58:33Z",
+          "source_index_name": "risview_20260819185831",
+          "sha256": "abaf8d8593b4e93d21c3db5aeefc9bc46e36d9d9c97b7e7fff956a8e540d24e0",
+          "raw_json": "{\"meta\":{\"total\":8,\"parameters\":{\"filters\":\"CERT:628 AND REPDTE:[20240930 TO 20260630]\",\"fields\":\"CERT,REPDTE,ASSET,DEP,DEPDOM,EQ,INTAN,LNLSNET,DEPUNINS,COREDEP,RBCT1CER,RBC1AAJ,ROA,ROE,OFFDOM,NUMEMP\",\"limit\":\"100\"},\"index\":{\"name\":\"risview_20260819185831\",\"createTimestamp\":\"2026-08-19T18:58:33Z\"}},\"data\":[{\"data\":{\"COREDEP\":1798410000,\"ROA\":1.5266922997268586,\"RBCT1CER\":16.17,\"REPDTE\":\"20240930\",\"DEPDOM\":2032340000,\"NUMEMP\":228780,\"ROE\":17.28,\"ASSET\":3584105000,\"RBC1AAJ\":8.037495347221183,\"EQ\":317746000,\"DEP\":2532004000,\"DEPUNINS\":1129926000,\"INTAN\":50351000,\"OFFDOM\":4949,\"CERT\":628,\"LNLSNET\":1329167000,\"ID\":\"628_20240930\"},\"score\":0},{\"data\":{\"COREDEP\":1833157000,\"ROA\":1.5041494608073118,\"RBCT1CER\":16.04,\"REPDTE\":\"20241231\",\"DEPDOM\":2042646000,\"NUMEMP\":228098,\"ROE\":16.95,\"ASSET\":3459261000,\"RBC1AAJ\":7.8978702098913205,\"EQ\":312794000,\"DEP\":2516998000,\"DEPUNINS\":1151030000,\"INTAN\":50644000,\"OFFDOM\":5009,\"CERT\":628,\"LNLSNET\":1335559000,\"ID\":\"628_20241231\"},\"score\":0},{\"data\":{\"COREDEP\":1878776000,\"ROA\":1.4314115308151094,\"RBCT1CER\":15.75,\"REPDTE\":\"20250331\",\"DEPDOM\":2097135000,\"NUMEMP\":228404,\"ROE\":16.15,\"ASSET\":3643099000,\"RBC1AAJ\":7.904954605414102,\"EQ\":316613000,\"DEP\":2601221000,\"DEPUNINS\":1184618000,\"INTAN\":50608000,\"OFFDOM\":5013,\"CERT\":628,\"LNLSNET\":1342795000,\"ID\":\"628_20250331\"},\"score\":0},{\"data\":{\"COREDEP\":1913736000,\"ROA\":1.4219196171927215,\"RBCT1CER\":15.57,\"REPDTE\":\"20250630\",\"DEPDOM\":2132981000,\"NUMEMP\":226691,\"ROE\":16.26,\"ASSET\":3788551000,\"RBC1AAJ\":7.736640017451295,\"EQ\":322777000,\"DEP\":2669161000,\"DEPUNINS\":1225122000,\"INTAN\":50451000,\"OFFDOM\":5035,\"CERT\":628,\"LNLSNET\":1402682000,\"ID\":\"628_20250630\"},\"score\":0},{\"data\":{\"COREDEP\":1914921000,\"ROA\":1.3864764326074568,\"RBCT1CER\":15.69,\"REPDTE\":\"20250930\",\"DEPDOM\":2116593000,\"NUMEMP\":226927,\"ROE\":15.88,\"ASSET\":3813431000,\"RBC1AAJ\":7.847771150229808,\"EQ\":331953000,\"DEP\":2649438000,\"DEPUNINS\":1223904000,\"INTAN\":50505000,\"OFFDOM\":5059,\"CERT\":628,\"LNLSNET\":1433072000,\"ID\":\"628_20250930\"},\"score\":0},{\"data\":{\"COREDEP\":1955670000,\"ROA\":1.3448553188805723,\"RBCT1CER\":15.29,\"REPDTE\":\"20251231\",\"DEPDOM\":2167793000,\"NUMEMP\":226674,\"ROE\":15.32,\"ASSET\":3752662000,\"RBC1AAJ\":7.826646550078596,\"EQ\":335936000,\"DEP\":2697842000,\"DEPUNINS\":1272310000,\"INTAN\":50518000,\"OFFDOM\":5125,\"CERT\":628,\"LNLSNET\":1471951000,\"ID\":\"628_20251231\"},\"score\":0},{\"data\":{\"COREDEP\":1976710000,\"ROA\":1.438906517541693,\"RBCT1CER\":15.08,\"REPDTE\":\"20260331\",\"DEPDOM\":2209823000,\"NUMEMP\":227258,\"ROE\":16.64,\"ASSET\":4016571000,\"RBC1AAJ\":7.625673239135933,\"EQ\":335931000,\"DEP\":2787994000,\"DEPUNINS\":1287930000,\"INTAN\":50492000,\"OFFDOM\":5137,\"CERT\":628,\"LNLSNET\":1493977000,\"ID\":\"628_20260331\"},\"score\":0},{\"data\":{\"COREDEP\":1986736000,\"ROA\":1.5851712753913223,\"RBCT1CER\":15.03,\"REPDTE\":\"20260630\",\"DEPDOM\":2226790000,\"NUMEMP\":226846,\"ROE\":18.55,\"ASSET\":4091315000,\"RBC1AAJ\":7.494687148596367,\"EQ\":341580000,\"DEP\":2820284000,\"DEPUNINS\":1392514000,\"INTAN\":50505000,\"OFFDOM\":5176,\"CERT\":628,\"LNLSNET\":1535635000,\"ID\":\"628_20260630\"},\"score\":0}],\"totals\":{\"count\":8}}"
+        }
+      ],
+      "coverage": {
+        "requested_quarters": 8,
+        "reported_quarters": 8,
+        "missing_quarters": [],
+        "metric_missing_counts": {
+          "assets_usd": 0,
+          "deposits_usd": 0,
+          "domestic_deposits_usd": 0,
+          "equity_usd": 0,
+          "intangibles_usd": 0,
+          "net_loans_usd": 0,
+          "uninsured_deposits_usd": 0,
+          "core_deposits_usd": 0,
+          "cet1_ratio_pct": 0,
+          "leverage_ratio_pct": 0,
+          "roa_pct": 0,
+          "roe_pct": 0,
+          "domestic_offices": 0,
+          "employees": 0
+        }
+      },
+      "limitations": [
+        "FDIC BankFind institution records; not consolidated holding-company financials.",
+        "Current upstream revisions and institution identity labels at retrieval; not historical information-as-known-at-the-time.",
+        "Reported zeros are preserved; applicability of a zero is not inferred.",
+        "The requested calendar quarters are never filled with older reports or estimates."
+      ],
+      "content_sha256": "d3206e7f1031dc6ae12ccd34922a7e65e67c7b55e90ed96ae11b0ad589097bcf",
+      "dataset_id": "banksonsale-fdic-628-2026-06-30-d3206e7f1031"
+    },
+    {
+      "publisher": "BanksOnSale",
+      "publisher_url": "https://banksonsale.com",
+      "package_version": "0.1.0",
+      "schema_version": "1.0",
+      "bank": {
+        "cert": 3510,
+        "name": "Bank of America, National Association",
+        "city": "Charlotte",
+        "state": "NC",
+        "rssd_id": null,
+        "active": true,
+        "source_updated_at": "06/29/2026"
+      },
+      "requested_dates": [
+        "2024-09-30",
+        "2024-12-31",
+        "2025-03-31",
+        "2025-06-30",
+        "2025-09-30",
+        "2025-12-31",
+        "2026-03-31",
+        "2026-06-30"
+      ],
+      "report_date_defaulted": false,
+      "metric_definitions": {
+        "assets_usd": {
+          "name": "assets_usd",
+          "source_field": "ASSET",
+          "label": "Total assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported assets; excludes off-balance-sheet accounts.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "deposits_usd": {
+          "name": "deposits_usd",
+          "source_field": "DEP",
+          "label": "Total deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported deposits; not the domestic-deposit denominator.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_deposits_usd": {
+          "name": "domestic_deposits_usd",
+          "source_field": "DEPDOM",
+          "label": "Domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Domestic deposits, retained separately from total deposits.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "equity_usd": {
+          "name": "equity_usd",
+          "source_field": "EQ",
+          "label": "Total equity capital",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Accounting equity; not a regulatory capital ratio.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "intangibles_usd": {
+          "name": "intangibles_usd",
+          "source_field": "INTAN",
+          "label": "Intangible assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported intangible assets; missing observations remain missing.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "net_loans_usd": {
+          "name": "net_loans_usd",
+          "source_field": "LNLSNET",
+          "label": "Net loans and leases",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Net loans and leases, not gross loans or originations.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "uninsured_deposits_usd": {
+          "name": "uninsured_deposits_usd",
+          "source_field": "DEPUNINS",
+          "label": "Estimated uninsured domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported estimate for domestic offices and insured branches in U.S. territories and possessions; divide by domestic deposits only when both observations exist and the denominator is positive.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "core_deposits_usd": {
+          "name": "core_deposits_usd",
+          "source_field": "COREDEP",
+          "label": "Core deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "FDIC source-defined COREDEP measure; not an inference about loyalty or funding stability.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "cet1_ratio_pct": {
+          "name": "cet1_ratio_pct",
+          "source_field": "RBCT1CER",
+          "label": "Common equity tier 1 ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Risk-based CET1 ratio. A value of 12.5 means 12.5 percent; not RBC1AAJ.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "leverage_ratio_pct": {
+          "name": "leverage_ratio_pct",
+          "source_field": "RBC1AAJ",
+          "label": "Regulatory leverage ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC leverage ratio-PCA, tier 1 capital divided by adjusted average assets; not CET1.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roa_pct": {
+          "name": "roa_pct",
+          "source_field": "ROA",
+          "label": "Return on assets",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; never annualize this ratio again. Negative reported values are preserved.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roe_pct": {
+          "name": "roe_pct",
+          "source_field": "ROE",
+          "label": "Return on equity",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; missing or inapplicable observations remain missing.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_offices": {
+          "name": "domestic_offices",
+          "source_field": "OFFDOM",
+          "label": "Domestic offices",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Reported domestic offices, including headquarters.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "employees": {
+          "name": "employees",
+          "source_field": "NUMEMP",
+          "label": "Reported employees",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC NUMEMP observation, without inferring an employment category beyond the source definition.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        }
+      },
+      "sources": [
+        {
+          "agency": "FDIC",
+          "dataset": "institutions",
+          "url": "https://api.fdic.gov/banks/institutions?filters=CERT%3A3510&fields=CERT%2CNAME%2CCITY%2CSTALP%2CRSSDID%2CACTIVE%2CDATEUPDT&limit=2&format=json",
+          "retrieved_at": "2026-10-29T13:20:30.229397+00:00",
+          "source_index_created_at": "2026-10-23T11:54:56Z",
+          "source_index_name": "institutions_20261023090007",
+          "sha256": "7d006d4fbb7c538e76c8d426f8f9f0bd8a49b611c30462b793142a644b45f1fb",
+          "raw_json": "{\"meta\":{\"total\":1,\"parameters\":{\"filters\":\"CERT:3510\",\"fields\":\"CERT,NAME,CITY,STALP,RSSDID,ACTIVE,DATEUPDT\",\"limit\":\"2\"},\"index\":{\"name\":\"institutions_20261023090007\",\"createTimestamp\":\"2026-10-23T11:54:56Z\"}},\"data\":[{\"data\":{\"CITY\":\"Charlotte\",\"ACTIVE\":1,\"DATEUPDT\":\"06/29/2026\",\"CERT\":3510,\"STALP\":\"NC\",\"NAME\":\"Bank of America, National Association\",\"ID\":\"3510\"},\"score\":0}],\"totals\":{\"count\":1}}"
+        },
+        {
+          "agency": "FDIC",
+          "dataset": "financials",
+          "url": "https://api.fdic.gov/banks/financials?filters=CERT%3A3510+AND+REPDTE%3A%5B20240930+TO+20260630%5D&fields=CERT%2CREPDTE%2CASSET%2CDEP%2CDEPDOM%2CEQ%2CINTAN%2CLNLSNET%2CDEPUNINS%2CCOREDEP%2CRBCT1CER%2CRBC1AAJ%2CROA%2CROE%2COFFDOM%2CNUMEMP&limit=100&sort_by=REPDTE&sort_order=ASC&format=json",
+          "retrieved_at": "2026-10-29T13:20:31.528291+00:00",
+          "source_index_created_at": "2026-08-19T18:58:33Z",
+          "source_index_name": "risview_20260819185831",
+          "sha256": "e772bb3b2d7df492cc976334fa11d1eebf4b515141840b7c5e4f36bcef69617c",
+          "raw_json": "{\"meta\":{\"total\":8,\"parameters\":{\"filters\":\"CERT:3510 AND REPDTE:[20240930 TO 20260630]\",\"fields\":\"CERT,REPDTE,ASSET,DEP,DEPDOM,EQ,INTAN,LNLSNET,DEPUNINS,COREDEP,RBCT1CER,RBC1AAJ,ROA,ROE,OFFDOM,NUMEMP\",\"limit\":\"100\"},\"index\":{\"name\":\"risview_20260819185831\",\"createTimestamp\":\"2026-08-19T18:58:33Z\"}},\"data\":[{\"data\":{\"COREDEP\":1755945000,\"ROA\":1.0593310650076257,\"RBCT1CER\":13.4,\"REPDTE\":\"20240930\",\"DEPDOM\":1892511000,\"NUMEMP\":136723,\"ROE\":11.3,\"ASSET\":2565878000,\"RBC1AAJ\":7.635372775499409,\"EQ\":243688000,\"DEP\":2017820000,\"DEPUNINS\":791512000,\"INTAN\":58428000,\"OFFDOM\":3712,\"CERT\":3510,\"LNLSNET\":1064437000,\"ID\":\"3510_20240930\"},\"score\":0},{\"data\":{\"COREDEP\":1793763000,\"ROA\":1.06271482785911,\"RBCT1CER\":13.46,\"REPDTE\":\"20241231\",\"DEPDOM\":1926068000,\"NUMEMP\":137857,\"ROE\":11.31,\"ASSET\":2589060000,\"RBC1AAJ\":7.632592739216378,\"EQ\":245482000,\"DEP\":2055465000,\"DEPUNINS\":821914000,\"INTAN\":58458000,\"OFFDOM\":3675,\"CERT\":3510,\"LNLSNET\":1084434000,\"ID\":\"3510_20241231\"},\"score\":0},{\"data\":{\"COREDEP\":1811544000,\"ROA\":1.0964661141551424,\"RBCT1CER\":13.36,\"REPDTE\":\"20250331\",\"DEPDOM\":1942170000,\"NUMEMP\":137585,\"ROE\":11.59,\"ASSET\":2615296000,\"RBC1AAJ\":7.613947169716441,\"EQ\":246924000,\"DEP\":2071624000,\"DEPUNINS\":822178000,\"INTAN\":58383000,\"OFFDOM\":3656,\"CERT\":3510,\"LNLSNET\":1095391000,\"ID\":\"3510_20250331\"},\"score\":0},{\"data\":{\"COREDEP\":1842513000,\"ROA\":1.1092882753057818,\"RBCT1CER\":13.25,\"REPDTE\":\"20250630\",\"DEPDOM\":1975044000,\"NUMEMP\":135643,\"ROE\":11.75,\"ASSET\":2665555000,\"RBC1AAJ\":7.59468538061671,\"EQ\":250540000,\"DEP\":2109261000,\"DEPUNINS\":878711000,\"INTAN\":58360000,\"OFFDOM\":3640,\"CERT\":3510,\"LNLSNET\":1129643000,\"ID\":\"3510_20250630\"},\"score\":0},{\"data\":{\"COREDEP\":1827174000,\"ROA\":1.1423722438577848,\"RBCT1CER\":13.03,\"REPDTE\":\"20250930\",\"DEPDOM\":1956667000,\"NUMEMP\":135643,\"ROE\":12.09,\"ASSET\":2651090000,\"RBC1AAJ\":7.54319101889251,\"EQ\":251567000,\"DEP\":2094732000,\"DEPUNINS\":869263000,\"INTAN\":58322000,\"OFFDOM\":3626,\"CERT\":3510,\"LNLSNET\":1148203000,\"ID\":\"3510_20250930\"},\"score\":0},{\"data\":{\"COREDEP\":1836995000,\"ROA\":1.1544462063028051,\"RBCT1CER\":12.47,\"REPDTE\":\"20251231\",\"DEPDOM\":1961689000,\"NUMEMP\":136379,\"ROE\":12.24,\"ASSET\":2636823000,\"RBC1AAJ\":7.3622190475345395,\"EQ\":246250000,\"DEP\":2101968000,\"DEPUNINS\":862444000,\"INTAN\":58310000,\"OFFDOM\":3613,\"CERT\":3510,\"LNLSNET\":1166885000,\"ID\":\"3510_20251231\"},\"score\":0},{\"data\":{\"COREDEP\":1864127000,\"ROA\":1.1176461170292418,\"RBCT1CER\":12.17,\"REPDTE\":\"20260331\",\"DEPDOM\":1991308000,\"NUMEMP\":136056,\"ROE\":12.16,\"ASSET\":2672192000,\"RBC1AAJ\":7.136179709374528,\"EQ\":241710000,\"DEP\":2128004000,\"DEPUNINS\":876814000,\"INTAN\":58285000,\"OFFDOM\":3610,\"CERT\":3510,\"LNLSNET\":1191560000,\"ID\":\"3510_20260331\"},\"score\":0},{\"data\":{\"COREDEP\":1855116000,\"ROA\":1.126140493190317,\"RBCT1CER\":12.1,\"REPDTE\":\"20260630\",\"DEPDOM\":1983484000,\"NUMEMP\":133777,\"ROE\":12.31,\"ASSET\":2654645000,\"RBC1AAJ\":7.114434153916963,\"EQ\":240789000,\"DEP\":2121804000,\"DEPUNINS\":899695000,\"INTAN\":58274000,\"OFFDOM\":3598,\"CERT\":3510,\"LNLSNET\":1198387000,\"ID\":\"3510_20260630\"},\"score\":0}],\"totals\":{\"count\":8}}"
+        }
+      ],
+      "coverage": {
+        "requested_quarters": 8,
+        "reported_quarters": 8,
+        "missing_quarters": [],
+        "metric_missing_counts": {
+          "assets_usd": 0,
+          "deposits_usd": 0,
+          "domestic_deposits_usd": 0,
+          "equity_usd": 0,
+          "intangibles_usd": 0,
+          "net_loans_usd": 0,
+          "uninsured_deposits_usd": 0,
+          "core_deposits_usd": 0,
+          "cet1_ratio_pct": 0,
+          "leverage_ratio_pct": 0,
+          "roa_pct": 0,
+          "roe_pct": 0,
+          "domestic_offices": 0,
+          "employees": 0
+        }
+      },
+      "limitations": [
+        "FDIC BankFind institution records; not consolidated holding-company financials.",
+        "Current upstream revisions and institution identity labels at retrieval; not historical information-as-known-at-the-time.",
+        "Reported zeros are preserved; applicability of a zero is not inferred.",
+        "The requested calendar quarters are never filled with older reports or estimates."
+      ],
+      "content_sha256": "39099aba0334894854c71b5e46ecac30e373084c282cab1bbcaa12392f0dbf51",
+      "dataset_id": "banksonsale-fdic-3510-2026-06-30-39099aba0334"
+    },
+    {
+      "publisher": "BanksOnSale",
+      "publisher_url": "https://banksonsale.com",
+      "package_version": "0.1.0",
+      "schema_version": "1.0",
+      "bank": {
+        "cert": 58665,
+        "name": "Live Oak Banking Company",
+        "city": "Wilmington",
+        "state": "NC",
+        "rssd_id": null,
+        "active": true,
+        "source_updated_at": "03/14/2024"
+      },
+      "requested_dates": [
+        "2024-09-30",
+        "2024-12-31",
+        "2025-03-31",
+        "2025-06-30",
+        "2025-09-30",
+        "2025-12-31",
+        "2026-03-31",
+        "2026-06-30"
+      ],
+      "report_date_defaulted": false,
+      "metric_definitions": {
+        "assets_usd": {
+          "name": "assets_usd",
+          "source_field": "ASSET",
+          "label": "Total assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported assets; excludes off-balance-sheet accounts.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "deposits_usd": {
+          "name": "deposits_usd",
+          "source_field": "DEP",
+          "label": "Total deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Total reported deposits; not the domestic-deposit denominator.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_deposits_usd": {
+          "name": "domestic_deposits_usd",
+          "source_field": "DEPDOM",
+          "label": "Domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Domestic deposits, retained separately from total deposits.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "equity_usd": {
+          "name": "equity_usd",
+          "source_field": "EQ",
+          "label": "Total equity capital",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Accounting equity; not a regulatory capital ratio.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "intangibles_usd": {
+          "name": "intangibles_usd",
+          "source_field": "INTAN",
+          "label": "Intangible assets",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported intangible assets; missing observations remain missing.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "net_loans_usd": {
+          "name": "net_loans_usd",
+          "source_field": "LNLSNET",
+          "label": "Net loans and leases",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Net loans and leases, not gross loans or originations.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "uninsured_deposits_usd": {
+          "name": "uninsured_deposits_usd",
+          "source_field": "DEPUNINS",
+          "label": "Estimated uninsured domestic deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "Reported estimate for domestic offices and insured branches in U.S. territories and possessions; divide by domestic deposits only when both observations exist and the denominator is positive.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "core_deposits_usd": {
+          "name": "core_deposits_usd",
+          "source_field": "COREDEP",
+          "label": "Core deposits",
+          "unit": "USD",
+          "multiplier": 1000,
+          "reporting_basis": "period_end",
+          "description": "FDIC source-defined COREDEP measure; not an inference about loyalty or funding stability.",
+          "source_unit": "USD thousands",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "cet1_ratio_pct": {
+          "name": "cet1_ratio_pct",
+          "source_field": "RBCT1CER",
+          "label": "Common equity tier 1 ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Risk-based CET1 ratio. A value of 12.5 means 12.5 percent; not RBC1AAJ.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "leverage_ratio_pct": {
+          "name": "leverage_ratio_pct",
+          "source_field": "RBC1AAJ",
+          "label": "Regulatory leverage ratio",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC leverage ratio-PCA, tier 1 capital divided by adjusted average assets; not CET1.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roa_pct": {
+          "name": "roa_pct",
+          "source_field": "ROA",
+          "label": "Return on assets",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; never annualize this ratio again. Negative reported values are preserved.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "roe_pct": {
+          "name": "roe_pct",
+          "source_field": "ROE",
+          "label": "Return on equity",
+          "unit": "percent",
+          "multiplier": 1,
+          "reporting_basis": "annualized_by_source",
+          "description": "Annualized by FDIC; missing or inapplicable observations remain missing.",
+          "source_unit": "percent",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "domestic_offices": {
+          "name": "domestic_offices",
+          "source_field": "OFFDOM",
+          "label": "Domestic offices",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "Reported domestic offices, including headquarters.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        },
+        "employees": {
+          "name": "employees",
+          "source_field": "NUMEMP",
+          "label": "Reported employees",
+          "unit": "count",
+          "multiplier": 1,
+          "reporting_basis": "period_end",
+          "description": "FDIC NUMEMP observation, without inferring an employment category beyond the source definition.",
+          "source_unit": "count",
+          "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+        }
+      },
+      "sources": [
+        {
+          "agency": "FDIC",
+          "dataset": "institutions",
+          "url": "https://api.fdic.gov/banks/institutions?filters=CERT%3A58665&fields=CERT%2CNAME%2CCITY%2CSTALP%2CRSSDID%2CACTIVE%2CDATEUPDT&limit=2&format=json",
+          "retrieved_at": "2026-10-29T13:20:32.597377+00:00",
+          "source_index_created_at": "2026-10-23T11:54:56Z",
+          "source_index_name": "institutions_20261023090007",
+          "sha256": "8eaf26d2c47a98b4037c83e7f860dbcbe3f18eda4ba145cc4915f0015083b31e",
+          "raw_json": "{\"meta\":{\"total\":1,\"parameters\":{\"filters\":\"CERT:58665\",\"fields\":\"CERT,NAME,CITY,STALP,RSSDID,ACTIVE,DATEUPDT\",\"limit\":\"2\"},\"index\":{\"name\":\"institutions_20261023090007\",\"createTimestamp\":\"2026-10-23T11:54:56Z\"}},\"data\":[{\"data\":{\"CITY\":\"Wilmington\",\"ACTIVE\":1,\"DATEUPDT\":\"03/14/2024\",\"CERT\":58665,\"STALP\":\"NC\",\"NAME\":\"Live Oak Banking Company\",\"ID\":\"58665\"},\"score\":0}],\"totals\":{\"count\":1}}"
+        },
+        {
+          "agency": "FDIC",
+          "dataset": "financials",
+          "url": "https://api.fdic.gov/banks/financials?filters=CERT%3A58665+AND+REPDTE%3A%5B20240930+TO+20260630%5D&fields=CERT%2CREPDTE%2CASSET%2CDEP%2CDEPDOM%2CEQ%2CINTAN%2CLNLSNET%2CDEPUNINS%2CCOREDEP%2CRBCT1CER%2CRBC1AAJ%2CROA%2CROE%2COFFDOM%2CNUMEMP&limit=100&sort_by=REPDTE&sort_order=ASC&format=json",
+          "retrieved_at": "2026-10-29T13:20:33.684035+00:00",
+          "source_index_created_at": "2026-08-19T18:58:33Z",
+          "source_index_name": "risview_20260819185831",
+          "sha256": "07599bd52006b19d8efa7f92a2ae5dfc5152f4a4e52d4a7a216b4f9a07313843",
+          "raw_json": "{\"meta\":{\"total\":8,\"parameters\":{\"filters\":\"CERT:58665 AND REPDTE:[20240930 TO 20260630]\",\"fields\":\"CERT,REPDTE,ASSET,DEP,DEPDOM,EQ,INTAN,LNLSNET,DEPUNINS,COREDEP,RBCT1CER,RBC1AAJ,ROA,ROE,OFFDOM,NUMEMP\",\"limit\":\"100\"},\"index\":{\"name\":\"risview_20260819185831\",\"createTimestamp\":\"2026-08-19T18:58:33Z\"}},\"data\":[{\"data\":{\"COREDEP\":7428174,\"ROA\":0.8132989286312731,\"RBCT1CER\":11.17,\"REPDTE\":\"20240930\",\"DEPDOM\":11474355,\"NUMEMP\":976,\"ROE\":10.73,\"ASSET\":12525707,\"RBC1AAJ\":8.389566712583084,\"EQ\":975293,\"DEP\":11474355,\"DEPUNINS\":1653885,\"INTAN\":55775,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":10023130,\"ID\":\"58665_20240930\"},\"score\":0},{\"data\":{\"COREDEP\":7539059,\"ROA\":0.7067386260963654,\"RBCT1CER\":10.96,\"REPDTE\":\"20241231\",\"DEPDOM\":11820718,\"NUMEMP\":990,\"ROE\":9.33,\"ASSET\":12855986,\"RBC1AAJ\":8.042303198659432,\"EQ\":970430,\"DEP\":11820718,\"DEPUNINS\":1705780,\"INTAN\":59332,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":10411860,\"ID\":\"58665_20241231\"},\"score\":0},{\"data\":{\"COREDEP\":8183263,\"ROA\":0.4003678030173413,\"RBCT1CER\":10.64,\"REPDTE\":\"20250331\",\"DEPDOM\":12445573,\"NUMEMP\":1015,\"ROE\":5.35,\"ASSET\":13503776,\"RBC1AAJ\":7.895725491020541,\"EQ\":1001802,\"DEP\":12445573,\"DEPUNINS\":1871319,\"INTAN\":60095,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":10871682,\"ID\":\"58665_20250331\"},\"score\":0},{\"data\":{\"COREDEP\":8751211,\"ROA\":0.5863703091840319,\"RBCT1CER\":10.65,\"REPDTE\":\"20250630\",\"DEPDOM\":12635750,\"NUMEMP\":1032,\"ROE\":7.8,\"ASSET\":13741177,\"RBC1AAJ\":7.788335282064724,\"EQ\":1040686,\"DEP\":12635750,\"DEPUNINS\":1948075,\"INTAN\":63510,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":11182615,\"ID\":\"58665_20250630\"},\"score\":0},{\"data\":{\"COREDEP\":9156346,\"ROA\":0.6699732037301583,\"RBCT1CER\":10.48,\"REPDTE\":\"20250930\",\"DEPDOM\":13427352,\"NUMEMP\":1005,\"ROE\":8.94,\"ASSET\":14581672,\"RBC1AAJ\":7.811513192605204,\"EQ\":1083479,\"DEP\":13427352,\"DEPUNINS\":2190394,\"INTAN\":65610,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":11729811,\"ID\":\"58665_20250930\"},\"score\":0},{\"data\":{\"COREDEP\":9124215,\"ROA\":0.8216395553024584,\"RBCT1CER\":10.46,\"REPDTE\":\"20251231\",\"DEPDOM\":13825105,\"NUMEMP\":1007,\"ROE\":10.95,\"ASSET\":15057824,\"RBC1AAJ\":7.7684001192687,\"EQ\":1137648,\"DEP\":13825105,\"DEPUNINS\":2164911,\"INTAN\":66240,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":12201413,\"ID\":\"58665_20251231\"},\"score\":0},{\"data\":{\"COREDEP\":9438987,\"ROA\":0.8886792544404991,\"RBCT1CER\":10.61,\"REPDTE\":\"20260331\",\"DEPDOM\":13966734,\"NUMEMP\":1010,\"ROE\":11.66,\"ASSET\":15229819,\"RBC1AAJ\":7.814556607819628,\"EQ\":1171333,\"DEP\":13966734,\"DEPUNINS\":2375718,\"INTAN\":67733,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":12400249,\"ID\":\"58665_20260331\"},\"score\":0},{\"data\":{\"COREDEP\":9823145,\"ROA\":0.9589344791893007,\"RBCT1CER\":10.46,\"REPDTE\":\"20260630\",\"DEPDOM\":14680431,\"NUMEMP\":1038,\"ROE\":12.59,\"ASSET\":15959938,\"RBC1AAJ\":7.992319030205462,\"EQ\":1213296,\"DEP\":14680431,\"DEPUNINS\":2437357,\"INTAN\":69779,\"OFFDOM\":1,\"CERT\":58665,\"LNLSNET\":12949254,\"ID\":\"58665_20260630\"},\"score\":0}],\"totals\":{\"count\":8}}"
+        }
+      ],
+      "coverage": {
+        "requested_quarters": 8,
+        "reported_quarters": 8,
+        "missing_quarters": [],
+        "metric_missing_counts": {
+          "assets_usd": 0,
+          "deposits_usd": 0,
+          "domestic_deposits_usd": 0,
+          "equity_usd": 0,
+          "intangibles_usd": 0,
+          "net_loans_usd": 0,
+          "uninsured_deposits_usd": 0,
+          "core_deposits_usd": 0,
+          "cet1_ratio_pct": 0,
+          "leverage_ratio_pct": 0,
+          "roa_pct": 0,
+          "roe_pct": 0,
+          "domestic_offices": 0,
+          "employees": 0
+        }
+      },
+      "limitations": [
+        "FDIC BankFind institution records; not consolidated holding-company financials.",
+        "Current upstream revisions and institution identity labels at retrieval; not historical information-as-known-at-the-time.",
+        "Reported zeros are preserved; applicability of a zero is not inferred.",
+        "The requested calendar quarters are never filled with older reports or estimates."
+      ],
+      "content_sha256": "d1e313492f9ab1fd5bb3ecab9e1c0a1107b46c8a1c4f2e98490eb86872b3e4e1",
+      "dataset_id": "banksonsale-fdic-58665-2026-06-30-d1e313492f9a"
+    }
+  ]
+}

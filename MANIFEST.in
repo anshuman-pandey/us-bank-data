@@ -1,0 +1,7 @@
+include LICENSE DATA_LICENSE.md CITATION.cff README.md
+recursive-include src/banksonsale_data/resources *.json
+recursive-include docs *.md *.json
+recursive-include notebooks *.ipynb
+recursive-include examples *.csv *.json
+recursive-include tests *.py
+recursive-include scripts *.py

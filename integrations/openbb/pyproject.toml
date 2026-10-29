@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openbb-banksonsale"
+version = "0.1.0"
+description = "BanksOnSale Data's U.S. bank lookup and financial panels for OpenBB V5."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "BanksOnSale"}]
+dependencies = ["banksonsale-data>=0.1.0,<0.2", "openbb-core[pandas]>=2,<3"]
+
+[project.urls]
+Homepage = "https://banksonsale.com"
+Repository = "https://github.com/anshuman-pandey/banksonsale-data"
+
+[project.entry-points.openbb_core_extension]
+banksonsale = "openbb_banksonsale.router:router"
+
+[tool.setuptools.packages.find]
+where = ["src"]

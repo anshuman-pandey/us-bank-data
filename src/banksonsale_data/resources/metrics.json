@@ -1,0 +1,160 @@
+{
+  "publisher": "BanksOnSale",
+  "schema_version": "1.0",
+  "metrics": [
+    {
+      "name": "assets_usd",
+      "source_field": "ASSET",
+      "label": "Total assets",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Total reported assets; excludes off-balance-sheet accounts.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "deposits_usd",
+      "source_field": "DEP",
+      "label": "Total deposits",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Total reported deposits; not the domestic-deposit denominator.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "domestic_deposits_usd",
+      "source_field": "DEPDOM",
+      "label": "Domestic deposits",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Domestic deposits, retained separately from total deposits.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "equity_usd",
+      "source_field": "EQ",
+      "label": "Total equity capital",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Accounting equity; not a regulatory capital ratio.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "intangibles_usd",
+      "source_field": "INTAN",
+      "label": "Intangible assets",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Reported intangible assets; missing observations remain missing.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "net_loans_usd",
+      "source_field": "LNLSNET",
+      "label": "Net loans and leases",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Net loans and leases, not gross loans or originations.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "uninsured_deposits_usd",
+      "source_field": "DEPUNINS",
+      "label": "Estimated uninsured domestic deposits",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "Reported estimate for domestic offices and insured branches in U.S. territories and possessions; divide by domestic deposits only when both observations exist and the denominator is positive.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "core_deposits_usd",
+      "source_field": "COREDEP",
+      "label": "Core deposits",
+      "unit": "USD",
+      "multiplier": 1000,
+      "reporting_basis": "period_end",
+      "description": "FDIC source-defined COREDEP measure; not an inference about loyalty or funding stability.",
+      "source_unit": "USD thousands",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "cet1_ratio_pct",
+      "source_field": "RBCT1CER",
+      "label": "Common equity tier 1 ratio",
+      "unit": "percent",
+      "multiplier": 1,
+      "reporting_basis": "period_end",
+      "description": "Risk-based CET1 ratio. A value of 12.5 means 12.5 percent; not RBC1AAJ.",
+      "source_unit": "percent",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "leverage_ratio_pct",
+      "source_field": "RBC1AAJ",
+      "label": "Regulatory leverage ratio",
+      "unit": "percent",
+      "multiplier": 1,
+      "reporting_basis": "period_end",
+      "description": "FDIC leverage ratio-PCA, tier 1 capital divided by adjusted average assets; not CET1.",
+      "source_unit": "percent",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "roa_pct",
+      "source_field": "ROA",
+      "label": "Return on assets",
+      "unit": "percent",
+      "multiplier": 1,
+      "reporting_basis": "annualized_by_source",
+      "description": "Annualized by FDIC; never annualize this ratio again. Negative reported values are preserved.",
+      "source_unit": "percent",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "roe_pct",
+      "source_field": "ROE",
+      "label": "Return on equity",
+      "unit": "percent",
+      "multiplier": 1,
+      "reporting_basis": "annualized_by_source",
+      "description": "Annualized by FDIC; missing or inapplicable observations remain missing.",
+      "source_unit": "percent",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "domestic_offices",
+      "source_field": "OFFDOM",
+      "label": "Domestic offices",
+      "unit": "count",
+      "multiplier": 1,
+      "reporting_basis": "period_end",
+      "description": "Reported domestic offices, including headquarters.",
+      "source_unit": "count",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    },
+    {
+      "name": "employees",
+      "source_field": "NUMEMP",
+      "label": "Reported employees",
+      "unit": "count",
+      "multiplier": 1,
+      "reporting_basis": "period_end",
+      "description": "FDIC NUMEMP observation, without inferring an employment category beyond the source definition.",
+      "source_unit": "count",
+      "source_url": "https://api.fdic.gov/banks/docs/risview_properties.yaml"
+    }
+  ]
+}
