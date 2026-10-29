@@ -1,4 +1,12 @@
-# BanksOnSale Data changelog
+# US Bank Data changelog
+
+## 0.1.1 — 2026-10-29
+
+Adds the descriptive public package `us-bank-data` and Python import `usbankdata`.
+The repository is now `us-bank-data`; its existing releases and old GitHub URLs
+remain accessible. The entry package delegates to the unchanged `banksonsale-data`
+engine. Existing imports, archived sources, metric definitions and dataset IDs
+are preserved.
 
 ## 0.1.0 — 2026-10-29
 

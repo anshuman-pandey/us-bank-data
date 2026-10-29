@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "us-bank-data"
+version = "0.1.1"
+description = "U.S. bank data for Python: FDIC financials, deposits, capital ratios, quarterly panels, and source-linked exports."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "BanksOnSale"}]
+keywords = ["bank data", "us bank data", "fdic", "bank financials", "banking", "financial data", "regulatory data", "pandas"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Education",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Programming Language :: Python :: 3",
+  "Topic :: Office/Business :: Financial",
+]
+dependencies = ["banksonsale-data>=0.1.0,<0.2"]
+
+[project.optional-dependencies]
+pandas = ["pandas>=1.5"]
+parquet = ["pyarrow>=14"]
+polars = ["polars>=0.20"]
+io = ["pandas>=1.5", "pyarrow>=14"]
+notebooks = ["pandas>=1.5", "nbformat>=5", "nbclient>=0.10", "ipykernel>=6"]
+
+[project.urls]
+Homepage = "https://www.banksonsale.com/developers"
+Repository = "https://github.com/anshuman-pandey/us-bank-data"
+Documentation = "https://github.com/anshuman-pandey/us-bank-data#readme"
+Issues = "https://github.com/anshuman-pandey/us-bank-data/issues"
+Changelog = "https://github.com/anshuman-pandey/us-bank-data/blob/main/CHANGELOG.md"
+
+[project.scripts]
+us-bank-data = "banksonsale_data.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

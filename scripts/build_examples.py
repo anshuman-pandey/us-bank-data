@@ -28,24 +28,24 @@ install = '''import importlib.util
 import subprocess
 import sys
 
-if importlib.util.find_spec("banksonsale_data") is None:
+if importlib.util.find_spec("usbankdata") is None:
     subprocess.check_call([sys.executable, "-m", "pip", "install",
-        "https://github.com/anshuman-pandey/banksonsale-data/releases/download/v0.1.0/banksonsale_data-0.1.0-py3-none-any.whl"])
+        "https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.1.1/us_bank_data-0.1.1-py3-none-any.whl"])
 '''
 first = [
- md('# BanksOnSale Data: one bank, eight quarters\n\nA reproducible financial panel for a class, notebook or application. Original source: FDIC BankFind Suite. This example uses a **frozen 2026Q2 sample**, not a latest-data claim. After installing the package, no source network requests are needed. Use a fresh Python 3.10+ notebook environment.\n'),
+ md('# US Bank Data: one bank, eight quarters\n\nA reproducible financial panel for a class, notebook or application. Original source: FDIC BankFind Suite. This example uses a **frozen 2026Q2 sample**, not a latest-data claim. After installing the package, no source network requests are needed. Use a fresh Python 3.10+ notebook environment.\n'),
  code(install),
- code('from banksonsale_data import load_sample\n\npanel = load_sample(58665)\nprint(panel.document["bank"]["name"])\nprint(panel.document["requested_dates"])\nprint(panel.document["coverage"])\n'),
+ code('from usbankdata import load_sample\n\npanel = load_sample(58665)\nprint(panel.document["bank"]["name"])\nprint(panel.document["requested_dates"])\nprint(panel.document["coverage"])\n'),
  md('## Inspect explicit units\n\nMoney is USD. Ratios are percent: 12.5 means 12.5%. Missing stays `None`; zero stays zero. CET1 uses RBCT1CER; leverage uses RBC1AAJ. The bank is distinct from its listed parent.\n'),
  code('latest = panel.rows[-1]\nfor field in ["report_date", "assets_usd", "deposits_usd", "cet1_ratio_pct", "leverage_ratio_pct", "roa_pct"]:\n    print(field, latest[field])\nprint(panel.document["metric_definitions"]["assets_usd"])\nassert latest["report_date"] == "2026-06-30"\n'),
  md('## Keep the evidence with the export\n\nThe CSV sidecar records the source URLs, retrieval times, raw source responses, metric definitions and file hash. The JSON snapshot can be loaded and checked later. Hashes detect content changes, not whether the original filing is economically correct.\n'),
- code('from pathlib import Path\nfrom banksonsale_data import BankPanel\n\noutput = Path("outputs/banksonsale-example")\npanel.export(output / "live-oak.csv")\npanel.export(output / "live-oak.json")\nrestored = BankPanel.load(output / "live-oak.json")\nassert restored.rows == panel.rows\nprint(panel.dataset_id)\nprint(output / "live-oak.manifest.json")\n'),
+ code('from pathlib import Path\nfrom usbankdata import BankPanel\n\noutput = Path("outputs/banksonsale-example")\npanel.export(output / "live-oak.csv")\npanel.export(output / "live-oak.json")\nrestored = BankPanel.load(output / "live-oak.json")\nassert restored.rows == panel.rows\nprint(panel.dataset_id)\nprint(output / "live-oak.manifest.json")\n'),
  md('## Optional live request\n\nUse `bank(58665).financials(quarters=8, through="2026Q2")` to fetch a new source snapshot for an explicit period. Omitting `through` selects that bank\'s latest available report date, which can differ from another bank\'s latest date.\n\nFor hosted saved research and monitoring, [continue in BanksOnSale](https://www.banksonsale.com/banks/58665). Hosted data editions are displayed separately; coverage can differ. The open package works without registering. Cite **BanksOnSale Data, sourced from FDIC BankFind Suite**, with the report dates and dataset ID.\n'),
 ]
 second = [
- md('# BanksOnSale Data: compare an exact quarter\n\nUse three real, pinned sample institutions to demonstrate a same-quarter comparison and SQL. They have very different sizes and business models: **this is not a matched peer group, ranking or investment recommendation**. Frozen report date: **2026-06-30**.\n'),
+ md('# US Bank Data: compare an exact quarter\n\nUse three real, pinned sample institutions to demonstrate a same-quarter comparison and SQL. They have very different sizes and business models: **this is not a matched peer group, ranking or investment recommendation**. Frozen report date: **2026-06-30**.\n'),
  code(install),
- code('from banksonsale_data import load_sample\n\npanels = [load_sample(cert) for cert in (628, 3510, 58665)]\nrows = [panel.rows[-1] for panel in panels]\nassert {row["report_date"] for row in rows} == {"2026-06-30"}\nfor row in rows:\n    print(row["cert"], row["bank_name"], row["report_date"], row["assets_usd"])\n'),
+ code('from usbankdata import load_sample\n\npanels = [load_sample(cert) for cert in (628, 3510, 58665)]\nrows = [panel.rows[-1] for panel in panels]\nassert {row["report_date"] for row in rows} == {"2026-06-30"}\nfor row in rows:\n    print(row["cert"], row["bank_name"], row["report_date"], row["assets_usd"])\n'),
  md('## Query the table using standard-library SQL\n\nUse an explicit CERT, not a ticker or similarly named parent. Leave missing ratios as SQL NULL. Zero and negative observations remain valid.\n'),
  code('import sqlite3\n\nconnection = sqlite3.connect(":memory:")\nconnection.execute("CREATE TABLE banks (cert INTEGER, bank_name TEXT, report_date TEXT, assets_usd INTEGER, deposits_usd INTEGER, cet1_ratio_pct REAL, leverage_ratio_pct REAL, roa_pct REAL)")\ncolumns = ["cert", "bank_name", "report_date", "assets_usd", "deposits_usd", "cet1_ratio_pct", "leverage_ratio_pct", "roa_pct"]\nconnection.executemany("INSERT INTO banks VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [[row[column] for column in columns] for row in rows])\nfor result in connection.execute("SELECT bank_name, report_date, assets_usd, cet1_ratio_pct, leverage_ratio_pct FROM banks ORDER BY cert"):\n    print(result)\nconnection.close()\n'),
  md('## Export a comparison and a source recipe\n\nA CSV is easy to share, but cannot carry all evidence by itself. Keep its manifest and the constituent dataset IDs. Do not infer that an institution is available for sale.\n'),

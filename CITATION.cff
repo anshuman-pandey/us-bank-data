@@ -1,14 +1,14 @@
 cff-version: 1.2.0
-message: "If you use BanksOnSale Data, cite this software and the FDIC source and reporting dates recorded in the dataset manifest."
-title: "BanksOnSale Data"
+message: "If you use US Bank Data, cite this software and the FDIC source and reporting dates recorded in the dataset manifest."
+title: "US Bank Data for Python"
 type: software
 authors:
   - name: "BanksOnSale"
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-10-29
 license: MIT
 url: "https://www.banksonsale.com/data"
-repository-code: "https://github.com/anshuman-pandey/banksonsale-data"
+repository-code: "https://github.com/anshuman-pandey/us-bank-data"
 abstract: "Keyless U.S. bank financial panels with explicit calendar quarters, metric units, archived FDIC responses and portable source-linked exports."
 keywords:
   - bank data
