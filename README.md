@@ -15,12 +15,17 @@ missing-data coverage and original source evidence.
 
 [Documentation](https://www.banksonsale.com/developers) · [Cohort guide](docs/COHORTS.md) · [14-field dictionary](docs/METRICS.md) · [Releases](https://github.com/anshuman-pandey/us-bank-data/releases)
 
+**Use it in ChatGPT or Claude:** [connect the free US Bank Data MCP server](https://www.banksonsale.com/ai).
+Search banks, compare financials, screen a cohort or retrieve a live FDIC observation
+with reporting dates, units and source links. No API key or Python installation.
+
 | Your starting point | Open this |
 |---|---|
 | **A class, MBA case or hackathon** | [Run the snapshot screener in Colab ↗](https://colab.research.google.com/github/anshuman-pandey/us-bank-data/blob/v0.2.0/notebooks/03_snapshot_screener.ipynb) |
 | **A Python application** | [Install and load a quarter ↓](#install) |
 | **Polars, DuckDB or SQL** | [Follow the Parquet lesson ↗](https://colab.research.google.com/github/anshuman-pandey/us-bank-data/blob/v0.2.0/notebooks/05_polars_duckdb_bank_data.ipynb) |
 | **A spreadsheet, without Python** | [Download CSV + source manifest ↓](#download-without-python) |
+| **ChatGPT, Claude or another AI client** | [Connect US Bank Data ↗](https://www.banksonsale.com/ai) · [Plugin source](plugins/us-bank-data) |
 
 <br />
 

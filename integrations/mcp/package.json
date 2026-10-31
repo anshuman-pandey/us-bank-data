@@ -1,0 +1,11 @@
+{
+  "name": "us-bank-data-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only US Bank Data MCP server for ChatGPT, Claude and compatible clients",
+  "engines": {"node": ">=22"},
+  "scripts": {"start": "node src/serve.mjs", "stdio": "node src/stdio.mjs", "test": "node --test test/*.test.mjs"},
+  "dependencies": {"@modelcontextprotocol/sdk": "1.32.2", "@cfworker/json-schema": "4.1.4"},
+  "license": "MIT"
+}

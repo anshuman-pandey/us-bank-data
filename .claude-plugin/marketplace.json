@@ -1,0 +1,6 @@
+{
+  "name": "us-bank-data-tools",
+  "owner": {"name": "BanksOnSale", "email": "admin@banksonsale.com"},
+  "metadata": {"description": "Public US Bank Data tools for reproducible financial research with FDIC sources."},
+  "plugins": [{"name": "us-bank-data", "source": "./plugins/us-bank-data", "description": "U.S. bank financials with reporting dates, units and FDIC source citations."}]
+}
