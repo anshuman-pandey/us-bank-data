@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="US Bank Data">
+  <rect width="1024" height="1024" rx="224" fill="#0b493c"/>
+  <path d="M225 374 512 213l287 161" fill="none" stroke="#f5efdf" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M274 433v257m159-257v257m159-257v257m159-257v257M225 760h574" stroke="#f5efdf" stroke-width="46" stroke-linecap="round"/>
+  <circle cx="751" cy="272" r="57" fill="#d2b673"/>
+</svg>

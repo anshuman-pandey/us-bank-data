@@ -1,0 +1,11 @@
+{
+  "name": "us-bank-data",
+  "version": "0.1.0",
+  "description": "Find, compare and screen U.S. bank financials with reporting dates, units and FDIC source citations.",
+  "author": {"name": "BanksOnSale", "url": "https://www.banksonsale.com/about", "email": "admin@banksonsale.com"},
+  "homepage": "https://www.banksonsale.com/ai",
+  "privacyPolicyUrl": "https://www.banksonsale.com/ai/privacy",
+  "repository": "https://github.com/anshuman-pandey/us-bank-data",
+  "license": "MIT",
+  "keywords": ["banking", "fdic", "bank-financials", "finance", "research", "mcp"]
+}

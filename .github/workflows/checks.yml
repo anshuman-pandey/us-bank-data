@@ -7,6 +7,16 @@ on:
 permissions:
   contents: read
 jobs:
+  ai-connectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: python3 scripts/prepare_mcp_fixture.py
+      - run: npm ci --ignore-scripts --prefix integrations/mcp
+      - run: npm test --prefix integrations/mcp
+      - run: python3 scripts/package_ai_plugin.py --output dist/us-bank-data-plugin-0.1.0.zip
+      - run: npm exec --yes --package @anthropic-ai/claude-code@2.1.316 -- claude plugin validate --strict ./plugins/us-bank-data
+      - run: npm exec --yes --package @anthropic-ai/claude-code@2.1.316 -- claude plugin validate .
   package:
     runs-on: ubuntu-latest
     strategy:

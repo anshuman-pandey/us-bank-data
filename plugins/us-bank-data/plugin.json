@@ -1,0 +1,50 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "us-bank-data",
+  "version": "0.1.0",
+  "description": "Find, compare and screen U.S. bank financials with reporting dates, units and FDIC source citations.",
+  "author": {"name": "BanksOnSale", "url": "https://www.banksonsale.com/about", "email": "admin@banksonsale.com"},
+  "homepage": "https://www.banksonsale.com/ai",
+  "repository": "https://github.com/anshuman-pandey/us-bank-data",
+  "license": "MIT",
+  "keywords": ["us-bank-data", "banking", "fdic", "bank-financials", "finance", "research", "education", "mcp"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "US Bank Data",
+        "shortDescription": "U.S. bank financials, with FDIC sources",
+        "longDescription": "Find banks by name or FDIC CERT, compare institutions at one reporting quarter, screen by state and asset size, and understand capital, deposits and profitability. Use a reproducible 4,313-record June 30, 2026 edition or query an institution's live FDIC financials. Financial results include units, reporting dates and source links. No account or API key required. Credit unions, customer accounts and private BanksOnSale workspaces are outside this connector's scope.",
+        "developerName": "BanksOnSale",
+        "category": "Research",
+        "capabilities": ["Search bank data", "Read public financials", "Compare banks", "Screen institutions"],
+        "websiteURL": "https://www.banksonsale.com/ai",
+        "supportURL": "https://github.com/anshuman-pandey/us-bank-data/issues",
+        "privacyPolicyURL": "https://www.banksonsale.com/ai/privacy",
+        "termsOfServiceURL": "https://www.banksonsale.com/terms",
+        "defaultPrompt": ["Compare State Street and Bank of America using the frozen June 2026 edition.", "Find North Carolina banks with $100 million to $1 billion in assets.", "What is the latest FDIC financial observation for CERT 628?"],
+        "brandColor": "#0B493C",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      },
+      "onboardingSkill": "./skills/us-bank-research/SKILL.md",
+      "review": {
+        "commerce": false,
+        "commerce_description": "This read-only connector does not sell products, accept payments or create subscriptions. BanksOnSale's separate research workspace has paid features.",
+        "test_cases": {
+          "positive": [
+            {"description": "Resolve and read an institution", "prompt": "Find State Street Bank and show its assets in the frozen edition.", "tools_triggered": "search, get_bank_financials", "expected_behavior": "Resolve CERT 14; report June 30, 2026 assets in USD with a source link and frozen-edition label."},
+            {"description": "Compare an explicit same-quarter cohort", "prompt": "Compare CERT 14 and 3510 at June 30, 2026.", "tools_triggered": "compare_banks", "expected_behavior": "Return both institutions at one reporting date. Distinguish CET1 and leverage, preserve missing values, cite sources."},
+            {"description": "Screen institutions", "prompt": "Find NC banks with at least $100 million and below $1 billion in assets in the frozen edition.", "tools_triggered": "screen_banks", "expected_behavior": "Use state NC and USD asset bounds, report exact total, paginate rather than implying a truncated page is the whole population."},
+            {"description": "Read coverage before analysis", "prompt": "Which quarter and institutions does US Bank Data cover?", "tools_triggered": "get_dataset_info", "expected_behavior": "Report 4,313 frozen records for June 30, 2026, 14 fields, NC/OI inclusion and separate live lookup. Do not call the frozen edition latest."},
+            {"description": "Live institution lookup", "prompt": "What is the latest available FDIC financial observation for CERT 628?", "tools_triggered": "get_live_bank_financials", "expected_behavior": "Omit quarter; report actual returned date, live retrieval timestamp and exact FDIC URL. On source failure, report failure rather than invent values."}
+          ],
+          "negative": [
+            {"description": "Unsupported credit-union data", "prompt": "Retrieve Navy Federal Credit Union's NCUA quarterly statement."},
+            {"description": "Private customer accounts", "prompt": "Show my personal checking transactions."},
+            {"description": "State-changing action", "prompt": "Buy shares or email this bank's CEO."}
+          ]
+        }
+      }
+    }
+  }
+}
