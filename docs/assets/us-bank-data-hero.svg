@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-labelledby="title desc">
+  <title id="title">US Bank Data — Bank data. Ready to build.</title>
+  <desc id="desc">An open-source Python package for a frozen quarter of 4,313 FDIC institution financial records, 14 selected financial fields and five teaching notebooks. Load the 2026Q2 snapshot and export CSV with a source manifest.</desc>
+  <rect width="1280" height="600" rx="18" fill="#f4f2e9"/>
+  <rect x="28" y="28" width="6" height="544" rx="3" fill="#165c48"/>
+  <path d="M70 394H632M70 548H632" stroke="#d2d9cb"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#123c31">
+    <text x="72" y="81" font-size="18" font-weight="700" letter-spacing="3">US BANK DATA</text>
+    <text x="72" y="181" font-family="Georgia, serif" font-size="68" letter-spacing="-2">Bank data.</text>
+    <text x="72" y="257" font-family="Georgia, serif" font-size="68" font-style="italic" letter-spacing="-2">Ready to build.</text>
+    <g font-size="23" fill="#51675b">
+      <text x="74" y="313">For your notebook, classroom or next app.</text>
+      <text x="74" y="350">The data and its evidence. Together.</text>
+    </g>
+    <g font-family="Georgia, serif" font-size="42"><text x="74" y="459">4,313</text><text x="282" y="459">14</text><text x="473" y="459">5</text></g>
+    <g font-size="15" fill="#51675b">
+      <text x="74" y="491">institution records</text><text x="282" y="491">financial fields</text><text x="473" y="491">notebooks</text>
+      <text x="74" y="524" font-size="13">Frozen 2026Q2 edition · Selected FDIC financials</text>
+    </g>
+  </g>
+  <rect x="696" y="75" width="520" height="444" rx="16" fill="#dde3d7"/>
+  <rect x="684" y="63" width="520" height="444" rx="16" fill="#103b30"/>
+  <path d="M684 118H1204" stroke="#366052"/>
+  <g fill="#c5af72"><circle cx="710" cy="91" r="4"/><circle cx="726" cy="91" r="4"/><circle cx="742" cy="91" r="4"/></g>
+  <text x="778" y="96" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#bad1c2">a better starting point.py</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="19" fill="#eef3e7">
+    <text x="714" y="161"><tspan fill="#b4d7b9">from</tspan> usbankdata <tspan fill="#b4d7b9">import</tspan> snapshot</text>
+    <text x="714" y="209">banks = snapshot(</text>
+    <text x="714" y="242">  quarter=<tspan fill="#e4c47f">"2026Q2"</tspan>,</text>
+    <text x="714" y="275">  edition=<tspan fill="#e4c47f">"2026-q2-r1"</tspan>,</text>
+    <text x="714" y="308">)</text>
+    <text x="714" y="356">banks.export(<tspan fill="#e4c47f">"banks.csv"</tspan>)</text>
+  </g>
+  <path d="M714 385H1174" stroke="#366052"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#c9decd">
+    <text x="714" y="420">✓  CSV + source manifest</text>
+    <text x="714" y="454">✓  No account or API key</text>
+    <text x="714" y="485">✓  Frozen snapshot works offline</text>
+  </g>
+  <text x="1198" y="565" text-anchor="end" font-family="Menlo, Consolas, monospace" font-size="14" fill="#51675b">pip install us-bank-data</text>
+</svg>

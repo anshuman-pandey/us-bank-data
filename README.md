@@ -1,12 +1,28 @@
 # US Bank Data for Python
 
-**A reproducible U.S. bank dataset for your class, notebook or app in one call.**
+![US Bank Data: bank data ready to build, with 4,313 frozen institution records, 14 selected financial fields and five notebooks.](docs/assets/us-bank-data-hero.svg)
+
+[![Release checks](https://github.com/anshuman-pandey/us-bank-data/actions/workflows/checks.yml/badge.svg)](https://github.com/anshuman-pandey/us-bank-data/actions/workflows/checks.yml)
+[![PyPI version](https://img.shields.io/pypi/v/us-bank-data?color=165c48)](https://pypi.org/project/us-bank-data/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-165c48)](https://pypi.org/project/us-bank-data/)
+[![Code: MIT](https://img.shields.io/badge/Code-MIT-165c48)](LICENSE)
+
+**A reproducible U.S. bank dataset for your notebook, classroom or next app.**
 
 Load a frozen quarter of FDIC institution financials, select a cohort, or fetch
 several banks across the same reporting window. Exports carry units, population,
 missing-data coverage and original source evidence.
 
-[PyPI](https://pypi.org/project/us-bank-data/) · [Cohort guide](docs/COHORTS.md) · [Metrics](docs/METRICS.md) · [Notebooks](notebooks) · [Public source edition](https://www.banksonsale.com/data/releases/2026-q2-r1)
+[Documentation](https://www.banksonsale.com/developers) · [Cohort guide](docs/COHORTS.md) · [14-field dictionary](docs/METRICS.md) · [Releases](https://github.com/anshuman-pandey/us-bank-data/releases)
+
+| Your starting point | Open this |
+|---|---|
+| **A class, MBA case or hackathon** | [Run the snapshot screener in Colab ↗](https://colab.research.google.com/github/anshuman-pandey/us-bank-data/blob/v0.2.0/notebooks/03_snapshot_screener.ipynb) |
+| **A Python application** | [Install and load a quarter ↓](#install) |
+| **Polars, DuckDB or SQL** | [Follow the Parquet lesson ↗](https://colab.research.google.com/github/anshuman-pandey/us-bank-data/blob/v0.2.0/notebooks/05_polars_duckdb_bank_data.ipynb) |
+| **A spreadsheet, without Python** | [Download CSV + source manifest ↓](#download-without-python) |
+
+<br />
 
 ## Install
 
@@ -36,6 +52,20 @@ including noninsured institutions and insured U.S. branches of foreign
 institutions. It is not an insured-only or active-only population, or a list of
 banks for sale. It is a frozen edition, not a latest-data claim. Original source
 responses and retrieval dates are included; this call works offline.
+
+## Download without Python
+
+Use the same **normalized U.S.-dollar** data from the v0.2.0 release:
+
+| File | What to keep |
+|---|---|
+| [CSV ↗](https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.2.0/us-bank-financials-2026-q2.csv) | Pair it with the [source manifest ↗](https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.2.0/us-bank-financials-2026-q2.manifest.json). |
+| [Parquet ↗](https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.2.0/us-bank-financials-2026-q2.parquet) | Includes the manifest in its `usbankdata` metadata. |
+| [SHA-256 checksums ↗](https://github.com/anshuman-pandey/us-bank-data/releases/download/v0.2.0/SHA256SUMS) | Verify the files before reusing the edition. |
+
+These files have the same 4,313-record population and frozen reporting date
+described above. The separate [website source edition](https://www.banksonsale.com/data/releases/2026-q2-r1)
+retains FDIC USD-thousands; its format and units differ from these package exports.
 
 ## Select banks at an explicit quarter
 
@@ -139,3 +169,11 @@ edition, report date and dataset ID. No FDIC endorsement is implied.
 See [data licensing](packages/us-bank-data/DATA_LICENSE.md),
 [cohort contract](docs/COHORTS.md), [legacy contract](docs/DATA_CONTRACT.md),
 [CITATION.cff](CITATION.cff) and [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+**Build something useful. Keep it reproducible.**
+
+[Report a data issue](https://github.com/anshuman-pandey/us-bank-data/issues) ·
+[Contribute a lesson](CONTRIBUTING.md) ·
+[Explore the hosted bank research workspace](docs/CONTINUE_IN_BANKSONSALE.md)
