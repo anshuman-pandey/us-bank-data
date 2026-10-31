@@ -4,12 +4,12 @@ title: "US Bank Data for Python"
 type: software
 authors:
   - name: "BanksOnSale"
-version: 0.1.1
-date-released: 2026-10-29
+version: 0.2.0
+date-released: 2026-10-31
 license: MIT
 url: "https://www.banksonsale.com/data"
 repository-code: "https://github.com/anshuman-pandey/us-bank-data"
-abstract: "Keyless U.S. bank financial panels with explicit calendar quarters, metric units, archived FDIC responses and portable source-linked exports."
+abstract: "Reproducible U.S. bank data: a bundled FDIC quarter snapshot, explicit multi-bank panels, metric units, archived source evidence and runnable classroom lessons."
 keywords:
   - bank data
   - FDIC
